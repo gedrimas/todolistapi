@@ -45,5 +45,13 @@ exports.loginRequired = function(req, res, next) {
   }
 };
 
+exports.get_my_links = function(req, res) {
+  console.log('REQ -----', req.user._id)
+  User.findById(req.user._id, function(err, user) {
+    if (err)
+      res.send(err);
+    res.json(user);
+  });
+};
 
 

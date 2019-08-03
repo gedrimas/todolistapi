@@ -9,6 +9,7 @@ exports.list_all_tasks = function(req, res) {
     if (err)
       res.send(err);
     res.json(task);
+    //console.log('REQUEST ------- ', req)
   });
 };
 

@@ -19,4 +19,7 @@ module.exports = function(app) {
     
   app.route('/auth/sign_in')
     .post(userHandlers.sign_in)
+
+  app.route('/mylinks')
+    .get(userHandlers.loginRequired, userHandlers.get_my_links)  
 };
