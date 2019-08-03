@@ -22,7 +22,7 @@ exports.register = function(req, res) {
 
 exports.sign_in = function(req, res) {
   User.findOne({
-    email: req.body.email
+    name: req.body.name
   }, function(err, user) {
     if (err) throw err;
     if (!user) {
@@ -31,7 +31,7 @@ exports.sign_in = function(req, res) {
       if (!user.comparePassword(req.body.password)) {
         res.status(401).json({ message: 'Authentication failed. Wrong password.' });
       } else {
-        return res.json({token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id}, 'RESTFULAPIs')});
+        return res.json({token: jwt.sign({ name: user.name, _id: user._id}, 'RESTFULAPIs')});
       }
     }
   });
@@ -46,26 +46,17 @@ exports.loginRequired = function(req, res, next) {
 };
 
 exports.get_my_links = function(req, res) {
-  console.log('REQ -----', req.user._id)
   User.findById(req.user._id, function(err, user) {
     if (err)
       res.send(err);
     res.json(user);
   });
 };
-// not finished
-/* exports.update_state = function(req, res) {
-  User.findOneAndUpdate({_id: req.user._id}, req.body, {new: true}, function(err, task) {
-    if (err)
-      res.send(err);
-    res.json(task);
-  });
-}; */
+
 exports.update_state = function(req, res) {
   User.findById(req.user._id, function(err, user) {
     if (err)
-      res.send(err);
-    console.log('REQ.USER.STATE', req.body.state)  
+      res.send(err); 
     user.state = req.body.state
     user.save(function(err, user) {
       if (err) {
@@ -77,7 +68,6 @@ exports.update_state = function(req, res) {
         return res.json(user);
       }
     });
-    //res.json(user);
   });
 };
 

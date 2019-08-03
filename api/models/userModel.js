@@ -5,25 +5,15 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
  var UserSchema = new Schema({
-   fullName: {
-     type: String,
-     trim: true,
-     required: true
-   },
-   email: {
+   name: {
      type: String,
      unique: true,
-     lowercase: true,
      trim: true,
      required: true
    },
    hash_password: {
      type: String,
      required: true
-   },
-   created: {
-     type: Date,
-     default: Date.now
    },
    state: {
     type: Schema.Types.Mixed
