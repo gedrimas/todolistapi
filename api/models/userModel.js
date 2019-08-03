@@ -24,6 +24,9 @@ var mongoose = require('mongoose'),
    created: {
      type: Date,
      default: Date.now
+   },
+   state: {
+    type: Schema.Types.Mixed
    }
  });
  

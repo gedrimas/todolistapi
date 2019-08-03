@@ -53,5 +53,31 @@ exports.get_my_links = function(req, res) {
     res.json(user);
   });
 };
-
+// not finished
+/* exports.update_state = function(req, res) {
+  User.findOneAndUpdate({_id: req.user._id}, req.body, {new: true}, function(err, task) {
+    if (err)
+      res.send(err);
+    res.json(task);
+  });
+}; */
+exports.update_state = function(req, res) {
+  User.findById(req.user._id, function(err, user) {
+    if (err)
+      res.send(err);
+    console.log('REQ.USER.STATE', req.body.state)  
+    user.state = req.body.state
+    user.save(function(err, user) {
+      if (err) {
+        return res.status(400).send({
+          message: err
+        });
+      } else {
+        user.state = req.body.state;
+        return res.json(user);
+      }
+    });
+    //res.json(user);
+  });
+};
 
