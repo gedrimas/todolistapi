@@ -1,9 +1,10 @@
 var User = require('./api/models/userModel'),
 jsonwebtoken = require("jsonwebtoken");
+var cors = require('cors')
 
 var express = require('express'),
   app = express(),
-  port = process.env.PORT || 3000,
+  port = process.env.PORT || 3001,
   mongoose = require('mongoose'),
   bodyParser = require('body-parser');
   
@@ -11,6 +12,7 @@ var express = require('express'),
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Tododb'); 
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
