@@ -12,5 +12,4 @@ module.exports = function(app) {
   app.route('/mylinks')
     .get(userHandlers.loginRequired, userHandlers.get_my_links)
     .post(userHandlers.loginRequired, userHandlers.update_state)  
-
 };
